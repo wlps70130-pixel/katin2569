@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: #26312d;
+  background:
+    linear-gradient(135deg, rgba(255, 250, 240, 0.96) 0%, rgba(248, 243, 231, 0.92) 34%, rgba(232, 240, 224, 0.86) 68%, rgba(255, 250, 240, 0.96) 100%),
+    linear-gradient(90deg, rgba(20, 84, 61, 0.08) 0 1px, transparent 1px 100%),
+    linear-gradient(0deg, rgba(184, 149, 77, 0.07) 0 1px, transparent 1px 100%);
+  background-size: auto, 72px 72px, 72px 72px;
+  font-feature-settings: "liga" 1, "kern" 1;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(184, 149, 77, 0.26);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@layer components {
+  .glass-panel {
+    border: 1px solid rgba(184, 149, 77, 0.22);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(255, 250, 240, 0.62));
+    box-shadow: 0 24px 70px rgba(20, 84, 61, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(22px);
+  }
+
+  .lift-card {
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  }
+
+  .lift-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(184, 149, 77, 0.38);
+    box-shadow: 0 24px 60px rgba(20, 84, 61, 0.14);
+  }
+
+  .premium-band {
+    background:
+      linear-gradient(135deg, rgba(20, 84, 61, 0.96), rgba(47, 122, 87, 0.92)),
+      linear-gradient(90deg, rgba(210, 179, 107, 0.22), transparent);
+  }
+
+  .hairline-grid {
+    background-image:
+      linear-gradient(rgba(20, 84, 61, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20, 84, 61, 0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .hero-media img {
+    border-radius: 1.35rem;
+  }
+
+  .focus-ring {
+    outline: none;
+    transition: box-shadow 180ms ease, border-color 180ms ease, background-color 180ms ease;
+  }
+
+  .focus-ring:focus-visible {
+    border-color: rgba(184, 149, 77, 0.7);
+    box-shadow: 0 0 0 5px rgba(184, 149, 77, 0.16);
+  }
+}
