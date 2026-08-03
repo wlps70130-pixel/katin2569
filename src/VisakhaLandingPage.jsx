@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Banknote,
   BookOpen,
@@ -53,7 +53,6 @@ const fallbackSettings = {
   'งานบุญประจำปี': 'งานกฐินสามัคคี ประจำปี 2569',
   'คำอธิบายป้ายหลัก':
     'ร่วมสืบสานพุทธประเพณีอันงดงาม สร้างบุญใหญ่หลังออกพรรษา เพื่อทำนุบำรุงพระพุทธศาสนาและเสนาสนะของวัด',
-  'แนวคิดของงาน': 'ศรัทธาร่วมใจ สืบทอดบุญกฐินอย่างสงบ งดงาม และโปร่งใส',
   'วันที่จัดงาน': 'วันอาทิตย์ที่ 1 พฤศจิกายน 2569',
   'เวลาเริ่มงาน': '09.00 น.',
   'สถานที่': 'วัดหลวงพ่อสดธรรมกายาราม',
@@ -87,8 +86,6 @@ const fallbackSettings = {
   'เมนูติดต่อ': 'ติดต่อ',
   'ปุ่มร่วมทำบุญ': 'ร่วมทำบุญ',
   'ปุ่มดูรายชื่อ': 'ดูรายชื่อ',
-  'ป้ายแนวคิดของงาน': 'แนวคิดของงาน',
-  'ป้ายอัปเดตล่าสุด': 'อัปเดตล่าสุด',
   'หัวข้อย่อยรายชื่อ': 'อนุโมทนาบุญ',
   'ช่องค้นหารายชื่อ': 'ค้นหาชื่อ / คณะ / ประเภท',
   'ป้ายจำนวนรายการ': 'จำนวนรายการ',
@@ -369,17 +366,6 @@ function useSheetData() {
   return { ...data, loading, error };
 }
 
-function formatToday() {
-  return new Intl.DateTimeFormat('th-TH-u-ca-buddhist', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    timeZone: 'Asia/Bangkok',
-  }).format(new Date());
-}
-
 function getIcon(name, className = 'h-5 w-5') {
   const Icon = iconMap[name] || Sparkles;
   return <Icon className={className} strokeWidth={1.8} />;
@@ -403,8 +389,6 @@ function useFallbackImage(event, fallbackSrc) {
 export default function VisakhaLandingPage() {
   const { settings, donors, schedule, activities, objectives, merits, loading, error } = useSheetData();
   const [query, setQuery] = useState('');
-  const updatedAt = useMemo(formatToday, []);
-
   const t = (key) => settings[key] || fallbackSettings[key] || key;
   useEffect(() => {
     const siteTitleKey = '\u0e0a\u0e37\u0e48\u0e2d\u0e40\u0e27\u0e47\u0e1a';
@@ -492,11 +476,6 @@ export default function VisakhaLandingPage() {
           <div className="order-1 md:order-2">
             <div className="hero-media glass-panel overflow-hidden rounded-[1.75rem] p-2">
               <img src={t('ลิงก์รูปหน้าปก')} alt={t('ชื่อกิจกรรมหลัก')} className="h-auto w-full object-contain" />
-            </div>
-            <div className="glass-panel mt-4 rounded-2xl p-4">
-              <div className="text-sm font-semibold text-mutedGold">{t('ป้ายแนวคิดของงาน')}</div>
-              <div className="mt-1 text-emeraldTemple">{t('แนวคิดของงาน')}</div>
-              <div className="mt-3 text-xs text-moss">{t('ป้ายอัปเดตล่าสุด')}: {updatedAt}</div>
             </div>
           </div>
         </section>
