@@ -484,8 +484,8 @@ export default function VisakhaLandingPage() {
           </div>
 
           <div className="order-1 md:order-2">
-            <div className="hero-media glass-panel aspect-[3/2] overflow-hidden rounded-[1.75rem] p-2">
-              <img src={t('ลิงก์รูปหน้าปก')} alt={t('ชื่อกิจกรรมหลัก')} className="h-full w-full object-cover" />
+            <div className="hero-media glass-panel overflow-hidden rounded-[1.75rem] p-2">
+              <img src={t('ลิงก์รูปหน้าปก')} alt={t('ชื่อกิจกรรมหลัก')} className="h-auto w-full object-contain" />
             </div>
             <div className="glass-panel mt-4 rounded-2xl p-4">
               <div className="text-sm font-semibold text-mutedGold">{t('ป้ายแนวคิดของงาน')}</div>
