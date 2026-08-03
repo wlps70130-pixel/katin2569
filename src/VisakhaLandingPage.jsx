@@ -394,6 +394,12 @@ function sectionLabel(text) {
   );
 }
 
+function useFallbackImage(event, fallbackSrc) {
+  if (event.currentTarget.src !== fallbackSrc) {
+    event.currentTarget.src = fallbackSrc;
+  }
+}
+
 export default function VisakhaLandingPage() {
   const { settings, donors, schedule, activities, objectives, merits, loading, error } = useSheetData();
   const [query, setQuery] = useState('');
@@ -636,17 +642,28 @@ export default function VisakhaLandingPage() {
             {sectionLabel(t('หัวข้อย่อยกิจกรรม'))}
             <h2 className="text-3xl font-semibold text-emeraldTemple">{t('หัวข้อกิจกรรม')}</h2>
             <div className="mt-8 grid gap-5 md:grid-cols-3">
-              {activities.map(([title, detail, image], index) => (
-                <article key={`${title}-${index}`} className="glass-panel lift-card overflow-hidden rounded-2xl">
-                  <div className="aspect-[4/3] bg-lotus">
-                    <img src={image || t('ลิงก์รูปหน้าปก')} alt={title} className="h-full w-full object-cover" />
-                  </div>
-                  <div className="p-5">
-                    <h3 className="font-semibold text-emeraldTemple">{title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-ink/70">{detail}</p>
-                  </div>
-                </article>
-              ))}
+              {activities.map(([title, detail, image], index) => {
+                const fallbackImage = t('ลิงก์รูปหน้าปก');
+                const activityImage = image || fallbackImage;
+
+                return (
+                  <article key={`${title}-${index}`} className="glass-panel lift-card overflow-hidden rounded-2xl">
+                    <div className="aspect-[4/3] bg-lotus">
+                      <img
+                        src={activityImage}
+                        alt={title}
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                        onError={(event) => useFallbackImage(event, fallbackImage)}
+                      />
+                    </div>
+                    <div className="p-5">
+                      <h3 className="font-semibold text-emeraldTemple">{title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-ink/70">{detail}</p>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
